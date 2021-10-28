@@ -28,22 +28,10 @@ public class CalculoTabuada {
 		return this.maximoMultiplicador;
 	}
 	
-	public void calcular() {
+	public int calcular(int contador) {
 				
-		int contador = 0;
-		
-		while(contador <= maximoMultiplicador) {
-			
-			int resultado = multiplicando * contador;
-			
-			String strResultado = multiplicando + " X " + contador + " = " + resultado;
-			System.out.println(strResultado);
-			
-			model.addElement(strResultado);
-			
-			contador++;
-			
-		}
+		int resultado = multiplicando * contador;
+		return resultado;
 		
 	}
 	
