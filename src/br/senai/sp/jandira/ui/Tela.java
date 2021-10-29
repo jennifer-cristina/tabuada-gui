@@ -1,36 +1,40 @@
 package br.senai.sp.jandira.ui;
 
 
-import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.plaf.FontUIResource;
 
 import br.senai.sp.jandira.model.CalculoTabuada;
 
+import java.awt.Color;
 public class Tela {
 
 	public void iniciar() {
 		
 		JFrame tela = new JFrame();
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tela.setSize(600,500);
+		tela.setSize(550,450);
 		tela.setTitle("Tabuada");
 		tela.setLayout(null);
 		
 		// fontes
 		
 		Font font = new Font("Monospace", Font.BOLD,30);
-		
+		Font font2 = new Font("Monospace", Font.BOLD,20);
+
 		// Cores
 		
 		Color azul = new Color(21, 39, 255);
@@ -39,20 +43,36 @@ public class Tela {
 		Color branco = new Color(255, 255, 255);
 
 		
+		JPanel header = new JPanel();
+		header.setBounds(0, 0, 550, 80);
+		header.setBackground(branco);
+		header.setLayout(null);
+		
+		
 		JLabel lblTabuada = new JLabel();
 		lblTabuada.setText("Tabuada");
 		lblTabuada.setBounds(40, 30, 150, 30);
 		lblTabuada.setFont(font);
 		lblTabuada.setForeground(azul);
 		
-	
+		header.add(lblTabuada);
+		
+		
+		JLabel lblImages = new JLabel();
+
+		ImageIcon iconLogo = new ImageIcon(getClass().getResource("../images/abaco (2).png"));
+
+		lblImages.setIcon(iconLogo);
+		lblImages.setBounds(350, 01, 100, 100);
+		header.add(lblImages);
+		
 		JLabel lblMultiplicando = new JLabel();
 		lblMultiplicando.setText("multiplicando: ");
-		lblMultiplicando.setBounds(40, 100, 150, 30);
+		lblMultiplicando.setBounds(85, 100, 150, 30);
 		
 		
 		JTextField txtMultiplicando = new JTextField();
-		txtMultiplicando.setText("5");
+		txtMultiplicando.setText("");
 		txtMultiplicando.setBounds(170, 95, 100, 40);
 		
 		
@@ -62,22 +82,24 @@ public class Tela {
 		
 		
 		JTextField txtMaximoMultiplicador = new JTextField();
-		txtMaximoMultiplicador.setText("5");
+		txtMaximoMultiplicador.setText("");
 		txtMaximoMultiplicador.setBounds(170, 170, 100, 40);
 		
 		
 		JButton btnCalcular = new JButton();
 		btnCalcular.setText("CALCULAR");
-		btnCalcular.setBounds(40, 250, 250, 50);
+		btnCalcular.setBounds(40, 250, 230, 40);
 		btnCalcular.setBackground(verde);
 		btnCalcular.setForeground(branco);
+		btnCalcular.setFont(font2);
 		
 		
 		JButton btnDel = new JButton();
-		btnDel.setBounds(40, 320, 250, 50);
+		btnDel.setBounds(40, 320, 230, 40);
 		btnDel.setText("LIMPAR");
 		btnDel.setBackground(vermelho);
 		btnDel.setForeground(branco);
+		btnDel.setFont(font2);
 		
 		JLabel lblResultado = new JLabel();
 		lblResultado.setText("Resultado: ");
@@ -98,9 +120,9 @@ public class Tela {
 		listResultados.setModel(tabuada);
 		scrollPane.getViewport().add(listResultados);
 		
-		
+		tela.getContentPane().add(lblImages);
+		tela.getContentPane().add(header);
 		tela.getContentPane().add(lblResultado);
-		tela.getContentPane().add(lblTabuada);
 		tela.getContentPane().add(btnDel);
 		tela.getContentPane().add(scrollPane);
 		tela.getContentPane().add(lblMultiplicando);
@@ -143,6 +165,10 @@ public class Tela {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				txtMultiplicando.setText("");
+				txtMaximoMultiplicador.setText("");
+
+				// código para limpar a lista também : tabuada.clear();
 				tabuada.removeAllElements();
 				txtMultiplicando.requestFocus();
 			}
